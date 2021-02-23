@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class TestsStudentRegistrationForm extends BaseClass {
     Faker faker = new Faker();
+    String url = "https://demoqa.com/automation-practice-form";
     String firstName = faker.name().firstName(),
             lastName = faker.name().lastName(),
             userEmail = faker.internet().emailAddress("email"),
@@ -26,7 +27,7 @@ public class TestsStudentRegistrationForm extends BaseClass {
 
     @Test
     void studentRegistrationForm() {
-        open("https://demoqa.com/automation-practice-form");
+        open(url);
         $(byText("Practice Form")).shouldHave(text("Practice Form"));
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
@@ -54,16 +55,16 @@ public class TestsStudentRegistrationForm extends BaseClass {
         $("#submit").click();
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $("tr:nth-of-type(1) > td:nth-of-type(2)").shouldHave(text(firstName + " " + lastName));
-        $("tr:nth-of-type(2) > td:nth-of-type(2)").shouldHave(text(userEmail));
-        $("tr:nth-of-type(3) > td:nth-of-type(2)").shouldHave(text(genderMale));
-        $("tr:nth-of-type(4) > td:nth-of-type(2)").shouldHave(text(userNumber));
-        $("tr:nth-of-type(5) > td:nth-of-type(2)").shouldHave(text(day + " " + month + "," + year));
-        $("tr:nth-of-type(6) > td:nth-of-type(2)").shouldHave(text(subject));
-        $("tr:nth-of-type(7) > td:nth-of-type(2)").shouldHave(text(hobbiesSports));
-        $("tr:nth-of-type(8) > td:nth-of-type(2)").shouldHave(text(picture));
-        $("tr:nth-of-type(9) > td:nth-of-type(2)").shouldHave(text(address));
-        $("tr:nth-of-type(10) > td:nth-of-type(2)").shouldHave(text(state + " " + city));
+        $x("//td[text()=\"Student Name\"]").sibling(0).shouldHave(text(firstName + " " + lastName));
+        $x("//td[text()=\"Student Email\"]").sibling(0).shouldHave(text(userEmail));
+        $x("//td[text()=\"Gender\"]").sibling(0).shouldHave(text(genderMale));
+        $x("//td[text()=\"Mobile\"]").sibling(0).shouldHave(text(userNumber));
+        $x("//td[text()=\"Date of Birth\"]").sibling(0).shouldHave(text(day + " " + month + "," + year));
+        $x("//td[text()=\"Subjects\"]").sibling(0).shouldHave(text(subject));
+        $x("//td[text()=\"Hobbies\"]").sibling(0).shouldHave(text(hobbiesSports));
+        $x("//td[text()=\"Picture\"]").sibling(0).shouldHave(text(picture));
+        $x("//td[text()=\"Address\"]").sibling(0).shouldHave(text(address));
+        $x("//td[text()=\"State and City\"]").sibling(0).shouldHave(text(state + " " + city));
         $("#closeLargeModal").click();
     }
 }
